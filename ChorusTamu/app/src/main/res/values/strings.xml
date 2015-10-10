@@ -1,15 +1,33 @@
 <resources>
 
     <string name="app_name">ChorusTamu</string>
-    <string name="add_textbox_hint">Add a ToDo item</string>
-    <string name="add_button_text">Add</string>
-    <string name="mobile_services">Mobile Services </string>
-    <string name="menu_refresh">Refresh</string>
-    <string name="checkbox_text">Item Text</string>
-    <string name="title_activity_main">MainActivity</string>
+        <string name="add_textbox_hint">Add a ToDo item</string>
+        <string name="add_button_text">Add</string>
+        <string name="mobile_services">Mobile Services </string>
+        <string name="menu_refresh">Refresh</string>
+        <string name="checkbox_text">Item Text</string>
+        <string name="title_activity_main">MainActivity</string>
 
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+        <string name="hello_world">Hello world!</string>
+        <string name="action_settings">Settings</string>
+
+
+
+    <string name="feedTitleText">chor.us</string>
+    <string name="descriptionText">Midnight..you come and pick me up, no headlights...a long drive,
+    could end in burning flames or paradise fade into view, oh, its
+    been a while since I have even heard from you...</string>
+    <string name="p1Text">player 1</string>
+    <string name="p2Text">player 2</string>
+    <string name="p3Text">player 3</string>
+    <string name="p4Text">player 4</string>
+
+    <string name="recordText">record</string>
+    <string name="stopText">stop</string>
+    <string name="playText">play</string>
+
+    <string name="playAllText">play all</string>
+
 
 
 
