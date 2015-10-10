@@ -2,6 +2,7 @@ package com.example.chorustamu;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -44,7 +45,7 @@ import java.util.List;
 
 
 public class MainActivity extends Activity {
-    Button p1, p2, p3, p4, stop,stop2,stop3,stop4, play, play2, play3, play4, full;
+    Button p1, p2, p3, p4, stop,stop2,stop3,stop4, play, play2, play3, play4, full, aca;
     private MediaRecorder myAudioRecorder;
     private MediaRecorder myAudioRecorder2;
     private MediaRecorder myAudioRecorder3;
@@ -57,6 +58,9 @@ public class MainActivity extends Activity {
     private MediaPlayer a2;
     private MediaPlayer a3;
     private MediaPlayer a4;
+    private MediaPlayer FullSong;
+    String[] songs;
+    public int currentSong = 0;
 
 
     @Override
@@ -76,24 +80,19 @@ public class MainActivity extends Activity {
         p2 = (Button) findViewById(R.id.button4);
         p3 = (Button) findViewById(R.id.button5);
         p4 = (Button) findViewById(R.id.button6);
-        full = (Button) findViewById(R.id.button13);
+        aca = (Button) findViewById(R.id.button13);
+        full = (Button) findViewById(R.id.button14);
 
-        stop.setEnabled(false);
-        stop2.setEnabled(false);
-        stop3.setEnabled(false);
-        stop4.setEnabled(false);
-        play.setEnabled(false);
-        play2.setEnabled(false);
-        play3.setEnabled(false);
-        play4.setEnabled(false);
-        p2.setEnabled(false);
-        p3.setEnabled(false);
-        p4.setEnabled(false);
+
         outputFile = Environment.getExternalStorageDirectory().getAbsolutePath() + "/recording.wav";
         outputFile2 = Environment.getExternalStorageDirectory().getAbsolutePath() + "/recording2.wav";
         outputFile3 = Environment.getExternalStorageDirectory().getAbsolutePath() + "/recording3.wav";
         outputFile4 = Environment.getExternalStorageDirectory().getAbsolutePath() + "/recording4.wav";
-
+        songs = new String[4];
+        songs[0] = outputFile;
+        songs[1] = outputFile2;
+        songs[2] = outputFile3;
+        songs[3] = outputFile4;
 
 
         myAudioRecorder = new MediaRecorder();
@@ -130,8 +129,7 @@ public class MainActivity extends Activity {
                     e.printStackTrace();
                 }
                 //makePostRequest();
-                p1.setEnabled(false);
-                stop.setEnabled(true);
+
 
 
                 Toast.makeText(getApplicationContext(), "Recording started", Toast.LENGTH_LONG).show();
@@ -153,8 +151,6 @@ public class MainActivity extends Activity {
                     e.printStackTrace();
                 }
                 //makePostRequest();
-                p2.setEnabled(false);
-                stop2.setEnabled(true);
 
 
 
@@ -176,8 +172,7 @@ public class MainActivity extends Activity {
                     e.printStackTrace();
                 }
                 //makePostRequest();
-                p3.setEnabled(false);
-                stop3.setEnabled(true);
+
 
 
                 Toast.makeText(getApplicationContext(), "Recording started", Toast.LENGTH_LONG).show();
@@ -202,8 +197,7 @@ public class MainActivity extends Activity {
                 e.printStackTrace();
             }
             //makePostRequest();
-            p4.setEnabled(false);
-            stop4.setEnabled(true);
+
 
             Toast.makeText(getApplicationContext(), "Recording started", Toast.LENGTH_LONG).show();
 
@@ -217,44 +211,36 @@ public class MainActivity extends Activity {
         stop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            myAudioRecorder.stop();
-            myAudioRecorder.release();
-            myAudioRecorder = null;
+                myAudioRecorder.stop();
+                myAudioRecorder.release();
+                myAudioRecorder = null;
 
-            stop.setEnabled(false);
-            play.setEnabled(true);
-            p2.setEnabled(true);
 
-            Toast.makeText(getApplicationContext(), "Audio recorded successfully", Toast.LENGTH_LONG).show();
-        }
+
+                Toast.makeText(getApplicationContext(), "Audio recorded successfully", Toast.LENGTH_LONG).show();
+            }
         });
         stop2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            myAudioRecorder2.stop();
-            myAudioRecorder2.release();
-            myAudioRecorder2 = null;
+                myAudioRecorder2.stop();
+                myAudioRecorder2.release();
+                myAudioRecorder2 = null;
 
-            stop2.setEnabled(false);
-            play2.setEnabled(true);
-            p3.setEnabled(true);
 
-            Toast.makeText(getApplicationContext(), "Audio recorded successfully", Toast.LENGTH_LONG).show();
-        }
+                Toast.makeText(getApplicationContext(), "Audio recorded successfully", Toast.LENGTH_LONG).show();
+            }
         });
         stop3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            myAudioRecorder3.stop();
-            myAudioRecorder3.release();
-            myAudioRecorder3 = null;
+                myAudioRecorder3.stop();
+                myAudioRecorder3.release();
+                myAudioRecorder3 = null;
 
-            stop3.setEnabled(false);
-            play3.setEnabled(true);
-            p4.setEnabled(true);
 
-            Toast.makeText(getApplicationContext(), "Audio recorded successfully", Toast.LENGTH_LONG).show();
-        }
+                Toast.makeText(getApplicationContext(), "Audio recorded successfully", Toast.LENGTH_LONG).show();
+            }
         });
         stop4.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -263,8 +249,7 @@ public class MainActivity extends Activity {
             myAudioRecorder4.release();
             myAudioRecorder4 = null;
 
-            stop4.setEnabled(false);
-            play4.setEnabled(true);
+            
 
             Toast.makeText(getApplicationContext(), "Audio recorded successfully", Toast.LENGTH_LONG).show();
         }
@@ -362,7 +347,7 @@ public class MainActivity extends Activity {
         }
         });
 
-        full.setOnClickListener(new View.OnClickListener() {
+        aca.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) throws IllegalArgumentException, SecurityException, IllegalStateException {
                 a = new MediaPlayer();
@@ -400,7 +385,58 @@ public class MainActivity extends Activity {
             }
         });
 
+        full.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) throws IllegalArgumentException, SecurityException, IllegalStateException {
+
+               FullSong = new MediaPlayer();
+                try {
+                    FullSong.setDataSource(songs[currentSong]);
+
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                FullSong.setOnCompletionListener(new MediaPlayer.OnCompletionListener()
+                {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        currentSong++;
+                        if (currentSong < songs.length) {
+                            FullSong.reset();
+                            try{
+                            FullSong.setDataSource(songs[currentSong]);
+
+                            FullSong.prepare();
+                            }
+                            catch (IOException e){
+                                e.printStackTrace();
+                            }
+                            FullSong.start();
+                        } else {
+
+                            FullSong.release();
+                        }
+                    }
+                });
+                try {
+                    FullSong.prepare();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                FullSong.start();
+
+
+                Toast.makeText(getApplicationContext(), "Playing audio", Toast.LENGTH_LONG).show();
+                currentSong = 0;
+            }
+        });
+
+
+
     }
+
 
 
 
