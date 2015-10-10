@@ -58,6 +58,7 @@ public class MainActivity extends Activity {
     private MediaPlayer a3;
     private MediaPlayer a4;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,7 +89,7 @@ public class MainActivity extends Activity {
         p2.setEnabled(false);
         p3.setEnabled(false);
         p4.setEnabled(false);
-        outputFile = Environment.getExternalStorageDirectory().getAbsolutePath() + "/recording.wav";;
+        outputFile = Environment.getExternalStorageDirectory().getAbsolutePath() + "/recording.wav";
         outputFile2 = Environment.getExternalStorageDirectory().getAbsolutePath() + "/recording2.wav";
         outputFile3 = Environment.getExternalStorageDirectory().getAbsolutePath() + "/recording3.wav";
         outputFile4 = Environment.getExternalStorageDirectory().getAbsolutePath() + "/recording4.wav";
